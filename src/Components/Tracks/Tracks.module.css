@@ -1,0 +1,35 @@
+.container {
+  background-color: #000;
+}
+.container h3 {
+  color: #fff;
+  padding-top: 100px;
+  padding-left: 130px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+.tracksWrapper {
+  padding-left: 60px;
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 30px;
+}
+.exploreBtn {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 300;
+  background-color: #000;
+  border: none;
+  float: right;
+  padding-right: 70px;
+  padding-top: 20px;
+}
+.exploreBtn:hover {
+  cursor: pointer;
+  font-weight: 400;
+  text-decoration: underline;
+}

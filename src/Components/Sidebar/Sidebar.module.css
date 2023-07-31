@@ -1,0 +1,28 @@
+.nav {
+  width: 60px;
+  position: fixed;
+  height: 100vh;
+  background-color: #212529;
+  top: 0;
+  left: 0;
+}
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.links img {
+  width: 30px;
+  filter: invert(1);
+  padding: 8px 0;
+}
+.active img {
+  width: 35px;
+  filter: invert(67%) sepia(82%) saturate(739%) hue-rotate(161deg)
+    brightness(96%) contrast(85%);
+}
+.links img:hover {
+  filter: invert(67%) sepia(82%) saturate(739%) hue-rotate(161deg)
+    brightness(96%) contrast(85%);
+}
