@@ -1,10 +1,12 @@
 import Tracks from "../Components/Tracks/Tracks";
+import Artists from "../Components/Artists/Artists";
 import classes from "./Home.module.css";
 const Home = () => {
   return (
-    <div className={classes.container}>
+    <>
       <Tracks />
-    </div>
+      <Artists />
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useGetTopFiftyTracksQuery } from "../../Redux/Services/spotifyApi";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import TracksCard from "./TracksCard";
 import classes from "./Tracks.module.css";
 const Tracks = () => {
@@ -22,6 +21,7 @@ const Tracks = () => {
           return (
             <TracksCard
               key={item.track.id}
+              id={item.track.id}
               name={item.track.name}
               image={item.track.album.images[2].url}
               artists={item.track.artists
@@ -61,17 +61,14 @@ const Tracks = () => {
     );
   };
   return (
-    <div
-      className={classes.container}
-      style={{ height: isFetching ? "100vh" : "100%" }}
-    >
+    <div className={classes.container}>
       <h3>Trending Now</h3>
       <div className={classes.tracksWrapper}>
         {isFetching ? showSkeleton() : tracks}
       </div>
       {!isFetching && location.pathname !== "/allTracks" && (
         <button className={classes.exploreBtn} onClick={allClickHandler}>
-          Explore All
+          <span>Explore All</span>
         </button>
       )}
     </div>

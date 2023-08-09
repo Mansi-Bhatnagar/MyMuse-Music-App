@@ -3,8 +3,9 @@
   position: fixed;
   height: 100vh;
   background-color: #212529;
-  top: 0;
   left: 0;
+  top: 0;
+  z-index: 100;
 }
 .links {
   display: flex;
@@ -25,4 +26,17 @@
 .links img:hover {
   filter: invert(67%) sepia(82%) saturate(739%) hue-rotate(161deg)
     brightness(96%) contrast(85%);
+}
+@media (max-width: 576px) {
+  .nav {
+    height: 60px;
+    width: 100vw;
+    bottom: 0;
+    top: unset;
+  }
+  .links {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
 }

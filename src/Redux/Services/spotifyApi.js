@@ -4,10 +4,7 @@ export const spotifyApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://spotify23.p.rapidapi.com/",
     prepareHeaders: (headers) => {
-      headers.set(
-        "X-RapidAPI-Key",
-        "2be71c199emshd4cb42379ba9149p17ff99jsne561e4e0254f"
-      );
+      headers.set("X-RapidAPI-Key", process.env.REACT_APP_API_KEY);
       headers.set("X-RapidAPIHost", "spotify23.p.rapidapi.com");
     },
   }),
@@ -16,6 +13,24 @@ export const spotifyApi = createApi({
       query: (limit) =>
         `playlist_tracks/?id=4nNVfQ9eWidZXkBKZN5li4&offset=0&limit=${limit}`,
     }),
+    getTrackById: builder.query({
+      query: (id) => `tracks/?ids=${id}`,
+    }),
+    getLyricsById: builder.query({
+      query: (id) => `track_lyrics/?id=${id}`,
+    }),
+    getArtistsById: builder.query({
+      query: (id) => `artists/?ids=${id}`,
+    }),
+    getArtistOverviewById: builder.query({
+      query: (id) => `artist_overview/?id=${id}`,
+    }),
   }),
 });
-export const { useGetTopFiftyTracksQuery } = spotifyApi;
+export const {
+  useGetTopFiftyTracksQuery,
+  useGetTrackByIdQuery,
+  useGetLyricsByIdQuery,
+  useGetArtistsByIdQuery,
+  useGetArtistOverviewByIdQuery,
+} = spotifyApi;
