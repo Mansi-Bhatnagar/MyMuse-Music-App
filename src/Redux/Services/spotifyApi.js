@@ -10,8 +10,8 @@ export const spotifyApi = createApi({
   }),
   endpoints: (builder) => ({
     getTopFiftyTracks: builder.query({
-      query: (limit) =>
-        `playlist_tracks/?id=4nNVfQ9eWidZXkBKZN5li4&offset=0&limit=${limit}`,
+      query: ({ limit, id }) =>
+        `playlist_tracks/?id=${id}&offset=0&limit=${limit}`,
     }),
     getTrackById: builder.query({
       query: (id) => `tracks/?ids=${id}`,
@@ -25,6 +25,16 @@ export const spotifyApi = createApi({
     getArtistOverviewById: builder.query({
       query: (id) => `artist_overview/?id=${id}`,
     }),
+    getAlbumsById: builder.query({
+      query: (id) => `albums/?ids=${id}`,
+    }),
+    getAlbumMetadataById: builder.query({
+      query: (id) => `album_metadata/?id=${id}`,
+    }),
+    getAlbumTracksById: builder.query({
+      query: ({ limit, id }) =>
+        `https://spotify23.p.rapidapi.com/album_tracks/?id=${id}&offset=0&limit=${limit}`,
+    }),
   }),
 });
 export const {
@@ -33,4 +43,7 @@ export const {
   useGetLyricsByIdQuery,
   useGetArtistsByIdQuery,
   useGetArtistOverviewByIdQuery,
+  useGetAlbumsByIdQuery,
+  useGetAlbumMetadataByIdQuery,
+  useGetAlbumTracksByIdQuery,
 } = spotifyApi;

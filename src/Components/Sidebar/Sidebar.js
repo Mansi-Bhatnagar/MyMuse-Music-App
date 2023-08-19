@@ -16,7 +16,7 @@ const Sidebar = () => {
           data-tooltip-content={"Home"}
           data-tooltip-place="right"
         >
-          <img src={home} />
+          <img src={home} alt="" />
         </NavLink>
         <Tooltip id="home" style={{ backgroundColor: "#fff", color: "#000" }} />
         <NavLink
@@ -26,7 +26,7 @@ const Sidebar = () => {
           data-tooltip-content={"Search"}
           data-tooltip-place="right"
         >
-          <img src={search} />
+          <img src={search} alt="" />
         </NavLink>
         <Tooltip
           id="Search"
@@ -42,7 +42,7 @@ const Sidebar = () => {
           data-tooltip-content={"Favourites"}
           data-tooltip-place="right"
         >
-          <img src={fav} />
+          <img src={fav} alt="" />
         </NavLink>
         <Tooltip
           id="Favourites"
@@ -55,7 +55,7 @@ const Sidebar = () => {
           data-tooltip-content={"Category"}
           data-tooltip-place="right"
         >
-          <img src={category} />
+          <img src={category} alt="" />
         </NavLink>
         <Tooltip
           id="Category"

@@ -5,6 +5,7 @@ import Tracks from "./Components/Tracks/Tracks";
 import Artists from "./Components/Artists/Artists";
 import TrackDetail from "./Components/Tracks/TrackDetail";
 import ArtistDetail from "./Components/Artists/ArtistDetail";
+import AlbumDetail from "./Components/Albums/AlbumDetail";
 const router = createBrowserRouter([
   {
     path: "",
@@ -12,9 +13,11 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "allTracks", element: <Tracks /> },
-      { path: "tracks/:id", element: <TrackDetail /> },
+      { path: "allOldClassics", element: <Tracks /> },
       { path: "allArtists", element: <Artists /> },
+      { path: "tracks/:id", element: <TrackDetail /> },
       { path: "artist/:id", element: <ArtistDetail /> },
+      { path: "album/:id", element: <AlbumDetail /> },
     ],
   },
 ]);

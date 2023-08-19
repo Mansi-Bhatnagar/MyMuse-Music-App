@@ -1,0 +1,129 @@
+.container {
+  width: calc(100vw - 80px);
+  margin-left: 60px;
+  margin-top: 60px;
+  color: #fff;
+}
+.container figure {
+  height: 45vh;
+  position: relative;
+}
+.albumImage {
+  width: 200px;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  -webkit-box-shadow: -1px 6px 16px 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: -1px 6px 16px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: -1px 6px 16px 0px rgba(0, 0, 0, 0.45);
+}
+.container figcaption {
+  position: absolute;
+  bottom: 25px;
+  left: 250px;
+}
+.container figcaption span {
+  font-size: 16px;
+  text-transform: lowercase;
+}
+.container figcaption h1 {
+  font-size: 80px;
+  font-weight: 800;
+  margin: 0;
+}
+.container figcaption h4 {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+.favImage {
+  filter: invert(1);
+}
+.favImage:hover {
+  cursor: pointer;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid #ffffff67;
+  padding-bottom: 8px;
+  margin: 20px 80px;
+  margin-top: 50px;
+}
+.heading span:first-child {
+  flex: 1;
+}
+.heading span:nth-child(2) {
+  flex: 6;
+}
+.heading span:nth-child(3) {
+  flex: 3;
+}
+.heading span:last-child {
+  flex: 2;
+}
+.heading img {
+  filter: invert(1);
+  width: 20px;
+}
+.heading span {
+  font-size: 15px;
+}
+.trackWrapper {
+  margin: 0 80px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+@media (max-width: 1150px) {
+  .container figcaption h1 {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 830px) {
+  .container figcaption h1 {
+    font-size: 35px;
+  }
+}
+@media (max-width: 576px) {
+  .container figcaption h1 {
+    font-size: 25px;
+    font-weight: 600;
+  }
+  .container {
+    margin: 0;
+    width: 100%;
+  }
+  .trackWrapper {
+    margin: 20px;
+  }
+  .heading {
+    margin: 20px;
+  }
+  .container figcaption h4 {
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .trackWrapper {
+    padding-bottom: 80px;
+  }
+}
+@media (max-width: 510px) {
+  .container figure {
+    height: 60vh;
+    padding-top: 80px;
+    position: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+  }
+  .albumImage {
+    position: unset;
+  }
+  .container figcaption {
+    position: unset;
+  }
+}

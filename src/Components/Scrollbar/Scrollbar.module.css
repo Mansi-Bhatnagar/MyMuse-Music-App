@@ -1,0 +1,9 @@
+.wrapper::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+@media (max-width: 576px) {
+  .wrapper {
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+  }
+}

@@ -4,15 +4,25 @@ import { useGetTopFiftyTracksQuery } from "../../Redux/Services/spotifyApi";
 import Skeleton from "react-loading-skeleton";
 import TracksCard from "./TracksCard";
 import classes from "./Tracks.module.css";
-const Tracks = () => {
+const Tracks = (props) => {
+  let { limit, id, title, path } = props;
   const location = useLocation();
-  let limit = 9;
-  if (location.pathname === "/allTracks") limit = 51;
-  const { data, isFetching, error } = useGetTopFiftyTracksQuery(limit);
+  if (location.pathname === "/allTracks") {
+    limit = 51;
+    id = "4nNVfQ9eWidZXkBKZN5li4";
+  }
+  if (location.pathname === "/allOldClassics") {
+    limit = 99;
+    id = "41vFrXQsGWLHn0ZjbcBj2C";
+  }
+  const { data, isFetching, error } = useGetTopFiftyTracksQuery({
+    limit,
+    id,
+  });
   const [tracks, setTracks] = useState([]);
   const navigate = useNavigate();
   const allClickHandler = () => {
-    navigate("/allTracks");
+    navigate(path);
   };
   useEffect(() => {
     if (!isFetching && data) {
@@ -33,6 +43,9 @@ const Tracks = () => {
       );
     }
   }, [isFetching, data]);
+  if (error) {
+    console.log(error);
+  }
   const showSkeleton = () => {
     return (
       <>
@@ -62,7 +75,7 @@ const Tracks = () => {
   };
   return (
     <div className={classes.container}>
-      <h3>Trending Now</h3>
+      <h3>{title}</h3>
       <div className={classes.tracksWrapper}>
         {isFetching ? showSkeleton() : tracks}
       </div>

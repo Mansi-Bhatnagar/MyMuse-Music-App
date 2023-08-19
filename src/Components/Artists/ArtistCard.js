@@ -8,7 +8,7 @@ const ArtistCard = (props) => {
   const { name, image, followers, width, height, style, id } = props;
   const navigate = useNavigate();
   const displayArtistHandler = () => {
-    navigate(`artist/${id}`);
+    navigate(`/artist/${id}`);
   };
   const [favourite, setFavourite] = useState(false);
   const favHandler = () => {
@@ -23,6 +23,7 @@ const ArtistCard = (props) => {
     >
       <img
         src={image}
+        alt=""
         className={classes.artistImg}
         style={{ width: width, height: height }}
       />
@@ -31,6 +32,7 @@ const ArtistCard = (props) => {
         <a id="clickable" onClick={favHandler}>
           <img
             src={favourite ? favFilled : favHollow}
+            alt=""
             style={{ width: favourite ? "25px" : "30px" }}
           />
         </a>
@@ -42,7 +44,7 @@ const ArtistCard = (props) => {
           Add to favourites
         </Tooltip>
       </div>
-      <p>Followers: {followers}</p>
+      <p>Followers: {followers.toLocaleString("en-US")}</p>
     </div>
   );
 };

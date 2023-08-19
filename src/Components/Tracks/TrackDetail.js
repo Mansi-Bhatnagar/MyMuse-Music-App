@@ -118,7 +118,7 @@ const TrackDetail = () => {
           />
         ) : (
           <>
-            <img src={image} />
+            <img src={image} alt="" />
             <div className={classes.overlay}>
               {trackLyrics?.map((elem, idx) => (
                 <p key={idx}>{elem.words}</p>

@@ -86,13 +86,3 @@ const Artists = () => {
 };
 
 export default Artists;
-
-//    christina perri
-
-//    tanner patrick
-
-//   boywithuke
-
-//   alan walker
-
-//   andreah

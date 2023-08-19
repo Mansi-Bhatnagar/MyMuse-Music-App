@@ -1,0 +1,33 @@
+.container {
+  color: #fff;
+  margin-left: 60px;
+  margin-top: 60px;
+}
+.container h3 {
+  padding-left: 70px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.albumWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+@media (max-width: 1200px) {
+  .albumWrapper {
+    justify-content: center;
+  }
+  .container {
+    text-align: center;
+  }
+  .container h3 {
+    padding: 0;
+  }
+}
+@media (max-width: 576px) {
+  .container {
+    margin-left: 0;
+    margin-bottom: 80px;
+  }
+}
