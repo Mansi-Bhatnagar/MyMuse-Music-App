@@ -5,26 +5,36 @@ import {
 } from "../../Redux/Services/spotifyApi";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { audioActions } from "../../Redux/AudioSlice";
 import Skeleton from "react-loading-skeleton";
 import ArtistCard from "../Artists/ArtistCard";
 
 import classes from "./TrackDetail.module.css";
 const TrackDetail = () => {
   let { id } = useParams();
+  const dispatch = useDispatch();
   const {
     data: trackData,
     isFetching: trackFetching,
     error: trackError,
   } = useGetTrackByIdQuery(id);
-
   const [image, setImage] = useState();
-
   const [artistsId, setArtistsId] = useState();
-
+  useEffect(() => {
+    dispatch(audioActions.getUrl(null));
+  }, []);
   useEffect(() => {
     if (!trackFetching && trackData) {
-      setImage(trackData.tracks[0].album.images[0].url);
-      setArtistsId(trackData.tracks[0].artists.map((artist) => artist.id));
+      setImage(trackData?.tracks[0]?.album?.images[0]?.url);
+      setArtistsId(trackData?.tracks[0]?.artists?.map((artist) => artist.id));
+      dispatch(
+        audioActions.displayTrackImage(
+          trackData?.tracks[0]?.album?.images[2]?.url
+        )
+      );
+      dispatch(audioActions.displayTrackName(trackData?.tracks[0]?.name));
+      dispatch(audioActions.getUrl(trackData?.tracks[0]?.preview_url));
     }
   }, [trackFetching, trackData]);
 
@@ -38,7 +48,7 @@ const TrackDetail = () => {
 
   useEffect(() => {
     if (!lyricsFetching && lyricsData) {
-      setTrackLyrics(lyricsData.lyrics.lines);
+      setTrackLyrics(lyricsData?.lyrics?.lines);
     }
   }, [lyricsFetching, lyricsData]);
 

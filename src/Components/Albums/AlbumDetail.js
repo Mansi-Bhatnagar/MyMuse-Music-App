@@ -37,21 +37,21 @@ const AlbumDetail = () => {
   };
   useEffect(() => {
     if (!albumFetching && albumData) {
-      setImage(albumData.data.album.coverArt.sources[0].url);
+      setImage(albumData?.data?.album?.coverArt?.sources[0]?.url);
       setBackgroundColor(
-        albumData.data.album.coverArt.extractedColors.colorRaw.hex
+        albumData?.data?.album?.coverArt?.extractedColors?.colorRaw?.hex
       );
-      setType(albumData.data.album.type);
-      setName(albumData.data.album.name);
+      setType(albumData?.data?.album?.type);
+      setName(albumData?.data?.album?.name);
       setArtists(
-        albumData.data.album.artists.items
+        albumData?.data?.album?.artists?.items
           .map((artist) => {
             return artist.profile.name;
           })
           ?.join(", ")
       );
-      setYear(albumData.data.album.date.isoString.slice(0, 4));
-      setCount(albumData.data.album.tracks.totalCount);
+      setYear(albumData?.data?.album?.date?.isoString?.slice(0, 4));
+      setCount(albumData?.data?.album?.tracks?.totalCount);
     }
   }, [albumFetching, albumData]);
   useEffect(() => {

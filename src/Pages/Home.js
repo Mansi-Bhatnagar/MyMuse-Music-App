@@ -20,7 +20,7 @@ const Home = () => {
       />
       <Tracks
         id={"41vFrXQsGWLHn0ZjbcBj2C"}
-        limit={6}
+        limit={9}
         title={"Old Classics"}
         path={"/allOldClassics"}
       />
