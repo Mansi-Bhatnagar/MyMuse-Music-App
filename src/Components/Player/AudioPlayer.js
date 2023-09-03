@@ -13,11 +13,17 @@ import { useEffect } from "react";
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [favourite, setFavourite] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef();
+  const progressBarRef = useRef();
   const trackImage = useSelector((state) => state.currAudio.trackImage);
   const trackName = useSelector((state) => state.currAudio.trackName);
   const url = useSelector((state) => state.currAudio.url);
-  const audioRef = useRef();
-  const progressBarRef = useRef();
+  const onLoadedMetadata = () => {
+    const seconds = audioRef.current.duration;
+    setDuration(seconds);
+    progressBarRef.current.max = seconds;
+  };
   const playHandler = () => {
     setIsPlaying((prev) => !prev);
     if (isPlaying) {
@@ -32,11 +38,30 @@ const AudioPlayer = () => {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
+  const handleTimeUpdate = () => {
+    progressBarRef.current.value = audioRef.current.currentTime;
+    progressBarRef.current.style.setProperty(
+      "--range-progress",
+      `${(progressBarRef.current.value / duration) * 100}%`
+    );
+  };
+  const fastRewindHandler = () => {
+    audioRef.current.currentTime =
+      audioRef.current.currentTime - 5 > 0
+        ? audioRef.current.currentTime - 5
+        : 0;
+  };
+  const fastForwardHandler = () => {
+    audioRef.current.currentTime += 5;
+  };
   useEffect(() => {
     if (url && audioRef?.current) {
       setIsPlaying(true);
       audioRef.current.play();
     }
+    audioRef?.current?.addEventListener("ended", () => {
+      setIsPlaying(false);
+    });
   }, [url, audioRef]);
   return (
     <div className={classes.container}>
@@ -68,7 +93,7 @@ const AudioPlayer = () => {
         </div>
       </div>
       <div className={classes.controls}>
-        <button>
+        <button onClick={fastRewindHandler}>
           <img src={fastRewind} alt="fastRewind" />
         </button>
         <button onClick={playHandler}>
@@ -77,12 +102,16 @@ const AudioPlayer = () => {
             alt={isPlaying ? "pause" : "play"}
           />
         </button>
-        <button>
+        <button onClick={fastForwardHandler}>
           <img src={fastForward} alt="fastForward" />
         </button>
       </div>
       {url && (
-        <audio ref={audioRef}>
+        <audio
+          ref={audioRef}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={onLoadedMetadata}
+        >
           <source src={url} />
         </audio>
       )}
@@ -90,6 +119,7 @@ const AudioPlayer = () => {
         <input
           type="range"
           defaultValue="0"
+          min={0}
           ref={progressBarRef}
           onChange={handleProgressChange}
         ></input>

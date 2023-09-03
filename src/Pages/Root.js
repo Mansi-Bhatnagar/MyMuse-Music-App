@@ -1,16 +1,18 @@
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import Navbar from "../Components/Navbar/Navbar";
 import AudioPlayer from "../Components/Player/AudioPlayer";
 const RootLayout = () => {
+  const url = useSelector((state) => state.currAudio.url);
   return (
     <>
       <Sidebar />
       <Navbar />
-      <main style={{ marginBottom: "50px" }}>
+      <main style={{ marginBottom: "80px" }}>
         <Outlet />
       </main>
-      <AudioPlayer />
+      {url ? <AudioPlayer /> : ""}
     </>
   );
 };
