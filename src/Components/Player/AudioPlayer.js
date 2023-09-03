@@ -5,8 +5,8 @@ import play from "../../Assets/play_arrow_FILL0_wght400_GRAD0_opsz24.svg";
 import pause from "../../Assets/pause_FILL0_wght400_GRAD0_opsz24.svg";
 import fastForward from "../../Assets/fast_forward_FILL0_wght400_GRAD0_opsz24.svg";
 import fastRewind from "../../Assets/fast_rewind_FILL0_wght400_GRAD0_opsz24.svg";
-import favHollow from "../../Assets/favorite.svg";
-import favFilled from "../../Assets/heart-solid.svg";
+import favHollow from "../../Assets/heart-hollow.svg";
+import favFilled from "../../Assets/heart-filled.svg";
 import classes from "./AudioPlayer.module.css";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -29,7 +29,7 @@ const AudioPlayer = () => {
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play();
+      audioRef.current.play().catch((error) => console.log(error));
     }
   };
   const favHandler = () => {
@@ -57,16 +57,20 @@ const AudioPlayer = () => {
   useEffect(() => {
     if (url && audioRef?.current) {
       setIsPlaying(true);
-      audioRef.current.play();
+      audioRef.current.play().catch((error) => console.log(error));
     }
     audioRef?.current?.addEventListener("ended", () => {
       setIsPlaying(false);
+      progressBarRef.current.style.setProperty("--range-progress", "100%");
+      // progressBarRef.current.value = progressBarRef.current.max;
+      // console.log(progressBarRef.current.value);
+      // progressBarRef.current.dispatchEvent(new Event("input"));
     });
   }, [url, audioRef]);
   return (
     <div className={classes.container}>
       <div className={classes.info}>
-        <img src={trackImage} alt="" />
+        <img src={trackImage} alt="" className={classes.trackImage} />
         <div
           style={{
             display: "flex",
@@ -80,7 +84,7 @@ const AudioPlayer = () => {
             <img
               src={favourite ? favFilled : favHollow}
               alt=""
-              style={{ width: favourite ? "20px" : "25px" }}
+              className={classes.heart}
             />
           </a>
           <Tooltip

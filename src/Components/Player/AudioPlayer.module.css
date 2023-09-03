@@ -14,20 +14,25 @@
 .info {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin-left: 100px;
 }
 
-.info img:first-child {
+.info .trackImage {
   border-radius: 8px;
   width: 50px;
   margin: 10px;
+  margin-left: 0;
 }
-.info img:last-child {
+.info .heart {
   filter: invert(1);
   margin: 0;
+  width: 25px;
 }
-
+.controls {
+  display: flex;
+  align-items: center;
+}
 .controls button {
   background-color: unset;
   border: 0;
@@ -51,6 +56,7 @@
   width: 100%;
   height: 3px;
   background: #2d2d2d;
+  background: red;
   appearance: unset;
   border-radius: 2px;
   cursor: pointer;
@@ -105,4 +111,56 @@
 }
 .progressBar input[type="range"]:active::-moz-range-thumb {
   transform: scale(1.2);
+}
+@media (max-width: 992px) {
+  .info {
+    margin-left: 30px;
+  }
+  .progressBar {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .info {
+    margin-left: 10px;
+  }
+  .progressBar {
+    margin-right: 10px;
+  }
+}
+@media (max-width: 576px) {
+  .container {
+    bottom: 60px;
+    width: 100%;
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+  .progressBar {
+    flex-basis: 100%;
+  }
+  .controls img {
+    width: 30px;
+  }
+  .controls button:nth-child(2) img {
+    width: 40px;
+  }
+  .info .trackImage {
+    width: 36px;
+  }
+  .info span {
+    font-size: 14px;
+  }
+  .info .heart {
+    width: 20px;
+  }
+  .info {
+    margin-left: 14px;
+  }
+  .controls {
+    margin-right: 14px;
+  }
+  .progressBar {
+    margin-right: 0;
+  }
 }
