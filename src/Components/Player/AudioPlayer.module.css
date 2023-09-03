@@ -56,7 +56,6 @@
   width: 100%;
   height: 3px;
   background: #2d2d2d;
-  background: red;
   appearance: unset;
   border-radius: 2px;
   cursor: pointer;
@@ -127,6 +126,27 @@
   }
   .progressBar {
     margin-right: 10px;
+  }
+  .info span {
+    z-index: 0;
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .info span p {
+    animation-name: slider;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+  }
+  @keyframes slider {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }
 @media (max-width: 576px) {

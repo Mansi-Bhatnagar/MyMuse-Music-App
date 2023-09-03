@@ -20,7 +20,7 @@ const AudioPlayer = () => {
   const trackName = useSelector((state) => state.currAudio.trackName);
   const url = useSelector((state) => state.currAudio.url);
   const onLoadedMetadata = () => {
-    const seconds = audioRef.current.duration;
+    const seconds = Math.floor(audioRef.current.duration);
     setDuration(seconds);
     progressBarRef.current.max = seconds;
   };
@@ -42,7 +42,7 @@ const AudioPlayer = () => {
     progressBarRef.current.value = audioRef.current.currentTime;
     progressBarRef.current.style.setProperty(
       "--range-progress",
-      `${(progressBarRef.current.value / duration) * 100}%`
+      `${(progressBarRef.current.value / Math.floor(duration)) * 100}%`
     );
   };
   const fastRewindHandler = () => {
@@ -62,9 +62,7 @@ const AudioPlayer = () => {
     audioRef?.current?.addEventListener("ended", () => {
       setIsPlaying(false);
       progressBarRef.current.style.setProperty("--range-progress", "100%");
-      // progressBarRef.current.value = progressBarRef.current.max;
-      // console.log(progressBarRef.current.value);
-      // progressBarRef.current.dispatchEvent(new Event("input"));
+      progressBarRef.current.value = progressBarRef.current.max;
     });
   }, [url, audioRef]);
   return (
@@ -79,7 +77,9 @@ const AudioPlayer = () => {
             flexDirection: "column",
           }}
         >
-          <span>{trackName}</span>
+          <span>
+            <p>{trackName}</p>
+          </span>
           <a id="clickable" onClick={favHandler} data-tooltip-place="right">
             <img
               src={favourite ? favFilled : favHollow}
@@ -111,23 +111,25 @@ const AudioPlayer = () => {
         </button>
       </div>
       {url && (
-        <audio
-          ref={audioRef}
-          onTimeUpdate={handleTimeUpdate}
-          onLoadedMetadata={onLoadedMetadata}
-        >
-          <source src={url} />
-        </audio>
+        <>
+          <audio
+            ref={audioRef}
+            onTimeUpdate={handleTimeUpdate}
+            onLoadedMetadata={onLoadedMetadata}
+          >
+            <source src={url} />
+          </audio>
+          <div className={classes.progressBar}>
+            <input
+              type="range"
+              defaultValue="0"
+              min={0}
+              ref={progressBarRef}
+              onChange={handleProgressChange}
+            ></input>
+          </div>
+        </>
       )}
-      <div className={classes.progressBar}>
-        <input
-          type="range"
-          defaultValue="0"
-          min={0}
-          ref={progressBarRef}
-          onChange={handleProgressChange}
-        ></input>
-      </div>
     </div>
   );
 };
