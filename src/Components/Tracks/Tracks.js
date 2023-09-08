@@ -88,4 +88,3 @@ const Tracks = (props) => {
   );
 };
 export default Tracks;
-// console.log(data.items[0].track.preview_url);

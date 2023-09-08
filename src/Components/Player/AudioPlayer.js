@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Tooltip } from "react-tooltip";
+import { favouriteActions } from "../../Redux/FavouritesSlice";
 import play from "../../Assets/play_arrow_FILL0_wght400_GRAD0_opsz24.svg";
 import pause from "../../Assets/pause_FILL0_wght400_GRAD0_opsz24.svg";
 import fastForward from "../../Assets/fast_forward_FILL0_wght400_GRAD0_opsz24.svg";
@@ -8,17 +11,18 @@ import fastRewind from "../../Assets/fast_rewind_FILL0_wght400_GRAD0_opsz24.svg"
 import favHollow from "../../Assets/heart-hollow.svg";
 import favFilled from "../../Assets/heart-filled.svg";
 import classes from "./AudioPlayer.module.css";
-import { useRef } from "react";
-import { useEffect } from "react";
 const AudioPlayer = () => {
+  let favTracks = [];
   const [isPlaying, setIsPlaying] = useState(true);
   const [favourite, setFavourite] = useState(false);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef();
+  const dispatch = useDispatch();
   const progressBarRef = useRef();
   const trackImage = useSelector((state) => state.currAudio.trackImage);
   const trackName = useSelector((state) => state.currAudio.trackName);
   const url = useSelector((state) => state.currAudio.url);
+  const id = useSelector((state) => state.currAudio.id);
   const onLoadedMetadata = () => {
     const seconds = Math.floor(audioRef.current.duration);
     setDuration(seconds);
@@ -33,7 +37,21 @@ const AudioPlayer = () => {
     }
   };
   const favHandler = () => {
-    setFavourite((prev) => !prev);
+    setFavourite((prev) => {
+      prev = !prev;
+      if (prev) {
+        favTracks = JSON.parse(localStorage.getItem("tracks")) || [];
+        favTracks.push(id);
+        localStorage.setItem("tracks", JSON.stringify(favTracks));
+      } else {
+        favTracks = JSON.parse(localStorage.getItem("tracks"))?.filter(
+          (item) => item !== id
+        );
+        localStorage.setItem("tracks", JSON.stringify(favTracks));
+      }
+      dispatch(favouriteActions.tracksChanged(favTracks));
+      return prev;
+    });
   };
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
@@ -54,6 +72,14 @@ const AudioPlayer = () => {
   const fastForwardHandler = () => {
     audioRef.current.currentTime += 5;
   };
+  useEffect(() => {
+    if (
+      JSON.parse(localStorage.getItem("tracks"))?.find((item) => item === id)
+    ) {
+      console.log(id);
+      setFavourite(true);
+    }
+  }, [id]);
   useEffect(() => {
     if (url && audioRef?.current) {
       setIsPlaying(true);

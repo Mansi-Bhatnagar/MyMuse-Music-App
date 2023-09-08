@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { audioActions } from "../../Redux/AudioSlice";
 import Skeleton from "react-loading-skeleton";
 import ArtistCard from "../Artists/ArtistCard";
-
 import classes from "./TrackDetail.module.css";
 const TrackDetail = () => {
   let { id } = useParams();
@@ -24,6 +23,7 @@ const TrackDetail = () => {
   useEffect(() => {
     dispatch(audioActions.getUrl(null));
   }, []);
+
   useEffect(() => {
     if (!trackFetching && trackData) {
       setImage(trackData?.tracks[0]?.album?.images[0]?.url);
@@ -35,6 +35,7 @@ const TrackDetail = () => {
       );
       dispatch(audioActions.displayTrackName(trackData?.tracks[0]?.name));
       dispatch(audioActions.getUrl(trackData?.tracks[0]?.preview_url));
+      dispatch(audioActions.getId(id));
     }
   }, [trackFetching, trackData]);
 

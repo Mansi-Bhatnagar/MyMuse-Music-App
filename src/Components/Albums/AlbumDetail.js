@@ -4,15 +4,19 @@ import {
   useGetAlbumTracksByIdQuery,
 } from "../../Redux/Services/spotifyApi";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Tooltip } from "react-tooltip";
-import favHollow from "../../Assets/favorite.svg";
-import favFilled from "../../Assets/heart-solid.svg";
-import clock from "../../Assets/clock.svg";
+import { favouriteActions } from "../../Redux/FavouritesSlice";
 import Skeleton from "react-loading-skeleton";
 import AlbumTrackList from "./AlbumtrackList";
+import favHollow from "../../Assets/heart-hollow.svg";
+import favFilled from "../../Assets/heart-filled.svg";
+import clock from "../../Assets/clock.svg";
 import classes from "./AlbumDetail.module.css";
 const AlbumDetail = () => {
   let { id } = useParams();
+  let favAlbums;
+  const dispatch = useDispatch();
   const [image, setImage] = useState();
   const [backgroundColor, setBackgroundColor] = useState();
   const [type, setType] = useState();
@@ -33,8 +37,29 @@ const AlbumDetail = () => {
     error: trackError,
   } = useGetAlbumTracksByIdQuery({ id, limit: 15 });
   const favHandler = () => {
-    setFavourite((prev) => !prev);
+    setFavourite((prev) => {
+      prev = !prev;
+      if (prev) {
+        favAlbums = JSON.parse(localStorage.getItem("albums")) || [];
+        favAlbums.push(id);
+        localStorage.setItem("albums", JSON.stringify(favAlbums));
+      } else {
+        favAlbums = JSON.parse(localStorage.getItem("albums")).filter(
+          (item) => item !== id
+        );
+        localStorage.setItem("albums", JSON.stringify(favAlbums));
+      }
+      dispatch(favouriteActions.albumsChanged(favAlbums));
+      return prev;
+    });
   };
+  useEffect(() => {
+    if (
+      JSON.parse(localStorage.getItem("albums"))?.find((item) => item === id)
+    ) {
+      setFavourite(true);
+    }
+  }, []);
   useEffect(() => {
     if (!albumFetching && albumData) {
       setImage(albumData?.data?.album?.coverArt?.sources[0]?.url);
@@ -125,12 +150,8 @@ const AlbumDetail = () => {
             <h4>
               {artists + ", "} {year + ", "} {count} songs
             </h4>
-            <a id="clickable" onClick={favHandler} className={classes.favImage}>
-              <img
-                src={favourite ? favFilled : favHollow}
-                alt=""
-                style={{ width: favourite ? "25px" : "30px" }}
-              />
+            <a id="clickable" onClick={favHandler} className={classes.heart}>
+              <img src={favourite ? favFilled : favHollow} alt="" />
             </a>
             <Tooltip
               anchorSelect="#clickable"

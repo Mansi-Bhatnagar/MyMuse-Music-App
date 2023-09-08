@@ -39,6 +39,9 @@
 .container:hover .artistImg {
   opacity: 1;
 }
+.heart img {
+  width: 25px;
+}
 @media (max-width: 1200px) {
   .container {
     margin: 30px 15px;

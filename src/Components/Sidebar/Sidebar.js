@@ -3,7 +3,7 @@ import { Tooltip } from "react-tooltip";
 import classes from "./Sidebar.module.css";
 import home from "../../Assets/house-light.svg";
 import search from "../../Assets/search.svg";
-import fav from "../../Assets/favorite.svg";
+import fav from "../../Assets/heart-hollow.svg";
 import category from "../../Assets/category.svg";
 const Sidebar = () => {
   return (

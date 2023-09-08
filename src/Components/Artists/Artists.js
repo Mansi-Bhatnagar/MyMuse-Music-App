@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { useGetArtistsByIdQuery } from "../../Redux/Services/spotifyApi";
 import Skeleton from "react-loading-skeleton";
 import classes from "./Artists.module.css";
-const Artists = () => {
+const Artists = (props) => {
+  let { ids, title, number } = props;
   const location = useLocation();
-  let ids =
-    "7H55rcKCfwqkyDFH9wpKM6,5wFpshVjY4ntIbIRNDJ5pj,1Cd373x8qzC7SNUg5IToqp,7vk5e3vY1uw9plTHJAMwjN,02yssJvjMJdJ3nueVhig4j";
-  if (location.pathname === "/allArtists")
+
+  if (location.pathname === "/allArtists") {
     ids =
       "7H55rcKCfwqkyDFH9wpKM6,5wFpshVjY4ntIbIRNDJ5pj,1Cd373x8qzC7SNUg5IToqp,7vk5e3vY1uw9plTHJAMwjN,02yssJvjMJdJ3nueVhig4j,04gDigrS5kc9YWfZHwBETP,7zyObVag8rUjItn71SkIrh,5JZ7CnR6gTvEMKX4g70Amv,4dM6NDYSfLcspt8GLoT5aE,5IH6FPUwQTxPSXurCrcIov";
+    title = "Popular Artists";
+  }
   const [artists, setArtists] = useState();
   const navigate = useNavigate();
   const allClickHandler = () => {
@@ -42,10 +44,10 @@ const Artists = () => {
     }
   }, [artistData, artistFetching]);
   if (artistError) console.log(artistError);
-  const showSkeleton = () => {
+  const showSkeleton = (number) => {
     return (
       <>
-        {Array(location.pathname === "/allArtists" ? 10 : 5)
+        {Array(location.pathname === "/allArtists" ? 10 : number)
           .fill()
           .map((item, index) => {
             return (
@@ -69,12 +71,11 @@ const Artists = () => {
       </>
     );
   };
-
   return (
     <div className={classes.container}>
-      <h3>Popular Artists</h3>
+      <h3>{title}</h3>
       <div className={classes.artistCon}>
-        {artistFetching ? showSkeleton() : artists}
+        {artistFetching ? showSkeleton(number) : artists}
       </div>
       {!artistFetching && location.pathname !== "/allArtists" && (
         <button className={classes.exploreBtn} onClick={allClickHandler}>

@@ -6,6 +6,7 @@ import Artists from "./Components/Artists/Artists";
 import TrackDetail from "./Components/Tracks/TrackDetail";
 import ArtistDetail from "./Components/Artists/ArtistDetail";
 import AlbumDetail from "./Components/Albums/AlbumDetail";
+import Favourites from "./Pages/Favourites";
 const router = createBrowserRouter([
   {
     path: "",
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "tracks/:id", element: <TrackDetail /> },
       { path: "artist/:id", element: <ArtistDetail /> },
       { path: "album/:id", element: <AlbumDetail /> },
+      { path: "fav", element: <Favourites /> },
     ],
   },
 ]);

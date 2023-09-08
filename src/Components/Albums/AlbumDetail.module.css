@@ -36,10 +36,13 @@
   font-weight: 400;
   margin-bottom: 5px;
 }
-.favImage {
+.heart {
   filter: invert(1);
 }
-.favImage:hover {
+.heart img {
+  width: 25px;
+}
+.heart:hover {
   cursor: pointer;
 }
 .heading {

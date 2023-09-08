@@ -4,7 +4,7 @@ import AlbumsCard from "./AlbumsCard";
 import Skeleton from "react-loading-skeleton";
 import classes from "./Albums.module.css";
 const Albums = (props) => {
-  const { ids, title } = props;
+  const { ids, title, number } = props;
   const [albums, setAlbums] = useState();
   const {
     data: albumData,
@@ -29,10 +29,10 @@ const Albums = (props) => {
       );
     }
   }, [albumData, albumFetching]);
-  const showSkeleton = () => {
+  const showSkeleton = (number = 5) => {
     return (
       <>
-        {Array(5)
+        {Array(number)
           .fill()
           .map((item, index) => {
             return (
@@ -60,7 +60,7 @@ const Albums = (props) => {
     <div className={classes.container}>
       <h3>{title}</h3>
       <div className={classes.albumWrapper}>
-        {albumFetching ? showSkeleton() : albums}
+        {albumFetching ? showSkeleton(number) : albums}
       </div>
     </div>
   );
