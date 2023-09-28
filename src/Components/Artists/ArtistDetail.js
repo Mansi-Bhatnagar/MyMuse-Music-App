@@ -44,35 +44,38 @@ const ArtistDetail = () => {
   useEffect(() => {
     if (!overviewFetching && overviewData) {
       setHeaderImage(
-        overviewData.data.artist.visuals.headerImage.sources[0].url
+        overviewData?.data?.artist?.visuals?.headerImage?.sources[0]?.url
       );
-      setName(overviewData.data.artist.profile.name);
-      setListeners(overviewData.data.artist.stats.monthlyListeners);
+      setName(overviewData?.data?.artist?.profile?.name);
+      setListeners(overviewData?.data?.artist?.stats?.monthlyListeners);
       setTracks(
-        overviewData.data.artist.discography.topTracks.items.map((item) => {
-          return (
-            <TracksCard
-              key={item?.track?.id}
-              id={item?.track?.id}
-              name={item?.track?.name}
-              image={item?.track?.album?.coverArt?.sources[1]?.url}
-              artists={item?.track?.artists?.items
-                .map((artist) => artist?.profile?.name)
-                ?.join(", ")}
-              style={{ width: "350px" }}
-            />
-          );
-        })
+        overviewData?.data?.artist?.discography?.topTracks?.items?.map(
+          (item) => {
+            return (
+              <TracksCard
+                key={item?.track?.id}
+                id={item?.track?.id}
+                name={item?.track?.name}
+                image={item?.track?.album?.coverArt?.sources[1]?.url}
+                artists={item?.track?.artists?.items
+                  .map((artist) => artist?.profile?.name)
+                  ?.join(", ")}
+                style={{ width: "350px" }}
+              />
+            );
+          }
+        )
       );
       setAlbumData(
-        overviewData.data.artist.discography.albums.items.map((elem) => {
+        overviewData?.data?.artist?.discography?.albums?.items?.map((elem) => {
           return (
             <AlbumsCard
-              key={elem.releases.items[0].id}
-              image={elem.releases.items[0].coverArt.sources[0].url}
-              name={elem.releases.items[0].name}
-              label={elem.releases.items[0].label}
-              date={elem.releases.items[0].date.year}
+              key={elem?.releases?.items[0]?.id}
+              id={elem?.releases?.items[0]?.id}
+              image={elem?.releases?.items[0]?.coverArt?.sources[0]?.url}
+              name={elem?.releases?.items[0]?.name}
+              label={elem?.releases?.items[0]?.label}
+              date={elem?.releases?.items[0]?.date?.year}
             />
           );
         })

@@ -29,6 +29,9 @@
   margin: 0;
   width: 25px;
 }
+.info .heart:hover {
+  cursor: pointer;
+}
 .controls {
   display: flex;
   align-items: center;

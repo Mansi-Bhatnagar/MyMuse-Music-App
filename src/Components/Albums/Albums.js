@@ -14,15 +14,15 @@ const Albums = (props) => {
   useEffect(() => {
     if (!albumFetching && albumData) {
       setAlbums(
-        albumData.albums.map((album) => {
+        albumData?.albums?.map((album) => {
           return (
             <AlbumsCard
-              key={album.id}
-              image={album.images[1].url}
-              name={album.name}
-              label={album.label}
-              date={album.release_date}
-              id={album.id}
+              key={album?.id}
+              image={album?.images[1]?.url}
+              name={album?.name}
+              label={album?.label}
+              date={album?.release_date}
+              id={album?.id}
             />
           );
         })

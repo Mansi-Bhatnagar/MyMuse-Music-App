@@ -26,17 +26,17 @@ const Artists = (props) => {
   useEffect(() => {
     if (!artistFetching && artistData) {
       setArtists(
-        artistData.artists?.map((elem) => {
+        artistData?.artists?.map((elem) => {
           return (
             <ArtistCard
-              key={elem.id}
-              name={elem.name}
-              followers={elem.followers?.total}
-              image={elem.images[1]?.url}
+              key={elem?.id}
+              name={elem?.name}
+              followers={elem?.followers?.total}
+              image={elem?.images[1]?.url}
               width="200px"
               height="200px"
               style={{ margin: "30px" }}
-              id={elem.id}
+              id={elem?.id}
             />
           );
         })

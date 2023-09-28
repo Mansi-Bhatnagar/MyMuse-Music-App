@@ -70,8 +70,8 @@ const AlbumDetail = () => {
       setName(albumData?.data?.album?.name);
       setArtists(
         albumData?.data?.album?.artists?.items
-          .map((artist) => {
-            return artist.profile.name;
+          ?.map((artist) => {
+            return artist?.profile?.name;
           })
           ?.join(", ")
       );
@@ -82,16 +82,20 @@ const AlbumDetail = () => {
   useEffect(() => {
     if (!trackFetching && trackData) {
       setTrackList(
-        trackData.data.album.tracks.items.map((track, index) => {
+        trackData?.data?.album?.tracks?.items?.map((track, index) => {
           return (
             <AlbumTrackList
-              key={track.track.uri.slice(14)}
-              id={track.track.uri.slice(14)}
+              key={track?.track?.uri?.slice(14)}
+              id={track?.track?.uri?.slice(14)}
               index={index + 1}
-              name={track.track.name}
-              play={Number(track.track.playcount).toLocaleString("en-US")}
+              name={track?.track?.name}
+              play={
+                !isNaN(Number(track?.track?.playcount))
+                  ? Number(track?.track?.playcount)?.toLocaleString("en-US")
+                  : ""
+              }
               duration={(
-                track.track.duration.totalMilliseconds / 60000
+                track?.track?.duration?.totalMilliseconds / 60000
               ).toFixed(2)}
             />
           );

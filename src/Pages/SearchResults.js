@@ -21,7 +21,7 @@ const SearchResults = (props) => {
     }
   }, []);
   useEffect(() => {
-    if (searchTerm.trim().length === 0 || searchTerm.trim().length > 3) {
+    if (searchTerm.trim().length === 0 || searchTerm.trim().length > 2) {
       setFilteredSearchTerm(searchTerm);
     }
   }, [searchTerm]);

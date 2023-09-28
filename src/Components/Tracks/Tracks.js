@@ -27,15 +27,15 @@ const Tracks = (props) => {
   useEffect(() => {
     if (!isFetching && data) {
       setTracks(
-        data.items.map((item) => {
+        data?.items?.map((item) => {
           return (
             <TracksCard
-              key={item.track.id}
-              id={item.track.id}
-              name={item.track.name}
-              image={item.track.album.images[2].url}
-              artists={item.track.artists
-                .map((artist) => artist.name)
+              key={item?.track?.id}
+              id={item?.track?.id}
+              name={item?.track?.name}
+              image={item?.track?.album?.images[2]?.url}
+              artists={item?.track?.artists
+                ?.map((artist) => artist?.name)
                 ?.join(", ")}
             />
           );

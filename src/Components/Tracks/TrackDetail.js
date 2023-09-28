@@ -27,15 +27,15 @@ const TrackDetail = () => {
   useEffect(() => {
     if (!trackFetching && trackData) {
       setImage(trackData?.tracks[0]?.album?.images[0]?.url);
-      setArtistsId(trackData?.tracks[0]?.artists?.map((artist) => artist.id));
+      setArtistsId(trackData?.tracks[0]?.artists?.map((artist) => artist?.id));
       dispatch(
-        audioActions.displayTrackImage(
+        audioActions?.displayTrackImage(
           trackData?.tracks[0]?.album?.images[2]?.url
         )
       );
-      dispatch(audioActions.displayTrackName(trackData?.tracks[0]?.name));
-      dispatch(audioActions.getUrl(trackData?.tracks[0]?.preview_url));
-      dispatch(audioActions.getId(id));
+      dispatch(audioActions?.displayTrackName(trackData?.tracks[0]?.name));
+      dispatch(audioActions?.getUrl(trackData?.tracks[0]?.preview_url));
+      dispatch(audioActions?.getId(id));
     }
   }, [trackFetching, trackData]);
 
@@ -68,16 +68,16 @@ const TrackDetail = () => {
       artistData.artists[0]
     ) {
       setArtists(
-        artistData.artists?.map((elem) => {
+        artistData?.artists?.map((elem) => {
           return (
             <ArtistCard
-              key={elem.id}
-              name={elem.name}
-              followers={elem.followers?.total}
-              image={elem.images[1]?.url}
+              key={elem?.id}
+              name={elem?.name}
+              followers={elem?.followers?.total}
+              image={elem?.images[1]?.url}
               width="320px"
               height="320px"
-              id={elem.id}
+              id={elem?.id}
             />
           );
         })
