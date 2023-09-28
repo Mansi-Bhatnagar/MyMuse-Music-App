@@ -76,7 +76,6 @@ const AudioPlayer = () => {
     if (
       JSON.parse(localStorage.getItem("tracks"))?.find((item) => item === id)
     ) {
-      console.log(id);
       setFavourite(true);
     }
   }, [id]);

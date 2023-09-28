@@ -52,12 +52,12 @@ const ArtistDetail = () => {
         overviewData.data.artist.discography.topTracks.items.map((item) => {
           return (
             <TracksCard
-              key={item.track.id}
-              id={item.track.id}
-              name={item.track.name}
-              image={item.track.album.coverArt.sources[1].url}
-              artists={item.track.artists.items
-                .map((artist) => artist.profile.name)
+              key={item?.track?.id}
+              id={item?.track?.id}
+              name={item?.track?.name}
+              image={item?.track?.album?.coverArt?.sources[1]?.url}
+              artists={item?.track?.artists?.items
+                .map((artist) => artist?.profile?.name)
                 ?.join(", ")}
               style={{ width: "350px" }}
             />

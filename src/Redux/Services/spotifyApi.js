@@ -33,7 +33,11 @@ export const spotifyApi = createApi({
     }),
     getAlbumTracksById: builder.query({
       query: ({ limit, id }) =>
-        `https://spotify23.p.rapidapi.com/album_tracks/?id=${id}&offset=0&limit=${limit}`,
+        `album_tracks/?id=${id}&offset=0&limit=${limit}`,
+    }),
+    search: builder.query({
+      query: ({ limit, query }) =>
+        `search/?q=${query}&type=multi&offset=0&limit=${limit}&numberOfTopResults=5`,
     }),
   }),
 });
@@ -46,4 +50,5 @@ export const {
   useGetAlbumsByIdQuery,
   useGetAlbumMetadataByIdQuery,
   useGetAlbumTracksByIdQuery,
+  useSearchQuery,
 } = spotifyApi;

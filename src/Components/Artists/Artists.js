@@ -5,7 +5,7 @@ import { useGetArtistsByIdQuery } from "../../Redux/Services/spotifyApi";
 import Skeleton from "react-loading-skeleton";
 import classes from "./Artists.module.css";
 const Artists = (props) => {
-  let { ids, title, number } = props;
+  let { ids, title, number, showAll } = props;
   const location = useLocation();
 
   if (location.pathname === "/allArtists") {
@@ -77,7 +77,7 @@ const Artists = (props) => {
       <div className={classes.artistCon}>
         {artistFetching ? showSkeleton(number) : artists}
       </div>
-      {!artistFetching && location.pathname !== "/allArtists" && (
+      {showAll && !artistFetching && location.pathname !== "/allArtists" && (
         <button className={classes.exploreBtn} onClick={allClickHandler}>
           <span>Explore All</span>
         </button>

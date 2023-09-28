@@ -4,7 +4,6 @@ import classes from "./Sidebar.module.css";
 import home from "../../Assets/house-light.svg";
 import search from "../../Assets/search.svg";
 import fav from "../../Assets/heart-hollow.svg";
-import category from "../../Assets/category.svg";
 const Sidebar = () => {
   return (
     <div className={classes.nav}>
@@ -46,19 +45,6 @@ const Sidebar = () => {
         </NavLink>
         <Tooltip
           id="Favourites"
-          style={{ backgroundColor: "#fff", color: "#000" }}
-        />
-        <NavLink
-          to="/category"
-          className={({ isActive }) => (isActive ? classes.active : undefined)}
-          data-tooltip-id="Category"
-          data-tooltip-content={"Category"}
-          data-tooltip-place="right"
-        >
-          <img src={category} alt="" />
-        </NavLink>
-        <Tooltip
-          id="Category"
           style={{ backgroundColor: "#fff", color: "#000" }}
         />
       </div>

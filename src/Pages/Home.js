@@ -1,7 +1,6 @@
 import Tracks from "../Components/Tracks/Tracks";
 import Artists from "../Components/Artists/Artists";
 import Albums from "../Components/Albums/Albums";
-import classes from "./Home.module.css";
 const Home = () => {
   return (
     <>
@@ -17,6 +16,7 @@ const Home = () => {
         }
         number={5}
         title={"Popular Artists"}
+        showAll={true}
       />
       <Albums
         ids={
