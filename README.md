@@ -38,9 +38,11 @@ This app allows users to-
 - search for tracks, albums and artists and get details about their number of followers, their top tracks and singles.
   ![ss6](src/Assets/img6.png)
 
-- view the optimal layout for the site depending on their device's screen size
+- view the optimal layout for the site depending on their device's screen size.
 
 - uses Skeleton Loading for good look and feel of app.
+
+- uses Tooltips to provide additional information about the features to the users.
 
 ## Built with
 
